@@ -5,27 +5,6 @@ library(ggplot2)
 library(ragg)
 
 
-# Change images
-image_happy = list.files("comparisons/data/", 
-                         pattern = "^noun_happy")
-
-image_sad = list.files("comparisons/data/", 
-                       pattern = "^noun_sad")
-
-
-image_read(paste0("./comparisons/data/", 
-                           image_happy)) %>%
-  image_colorize(100, "#828e85") %>%
-  image_write(path = here::here("comparisons", "data", 
-                                paste0("color_", image_happy)),
-              format = "png")
-
-image_read(paste0("./comparisons/data/", 
-                  image_sad)) %>%
-  image_colorize(100, "black") %>%
-  image_write(path = here::here("comparisons", "data", 
-                                paste0("color_", image_sad)),
-              format = "png")
 
 # Creating calendar data
 vertical_segments = tibble(
@@ -65,7 +44,7 @@ day_labels = tibble(
 
 # Reloading images
 list_images = list.files("comparisons/data/", 
-                         pattern = "color_noun_")
+                         pattern = "noun_")
 pet_imgs = here::here("comparisons", "data", paste0(list_images))
 
 
@@ -83,8 +62,7 @@ treats_labels = tibble(
   x = c(16, 21, 26, 31,
         1, 6, 11, 16) + 3,
   y = c(rep(26, 4),
-        rep(21, 4)) - 4.5,
-  color = c(rep("black", 7), "#828e85")
+        rep(21, 4)) - 4.5
 )
 
 file = here::here("comparisons", "outputs", "pictogram.png")
@@ -99,8 +77,7 @@ ggplot() +
             aes(x = x_final, y = y_final, label = days),
             hjust = 0.5,
             family = "Darker Grotesque",
-            fontface = "bold",
-            color = "white",
+            color = "black",
             size = 6) +
   geom_rect(aes(xmin = 1, xmax = 36,
                 ymin = 26.5, ymax = 27.5), 
@@ -108,20 +85,18 @@ ggplot() +
   geom_text(data = day_labels,
             aes(x = x, y = y, label = days),
             hjust = 0.5,
-            fontface = "bold",
             color = "white",
             size = 7,
             family = "Darker Grotesque") +
   geom_image(data = image_labels,
              aes(x = x, y = y, image = image),
-             size = .17,
+             size = .15,
              asp = 1.26,
              by = "width") +
   geom_text(data = treats_labels,
-            aes(x = x, y = y, label = labels, 
-                color = color),
+            aes(x = x, y = y, label = labels),
+            color = "black",
             hjust = 0.5,
-            fontface = "bold",
             size = 5,
             family = "Darker Grotesque") +
   scale_color_identity() +
@@ -130,8 +105,8 @@ ggplot() +
     aspect.ratio = 1/1.26,
     panel.grid = element_blank(),
     plot.background = element_blank(),
-    panel.background = element_rect(fill = "#e3d9d3",
-                                    color = "#e3d9d3"),
+    panel.background = element_rect(fill = "white",
+                                    color = "white"),
     axis.text = element_blank(),
     axis.title = element_blank(),
     axis.ticks = element_blank()
@@ -141,4 +116,4 @@ invisible(dev.off())
 
 #baccbf green
 # #b58b81 reddish
-# By Gregor Cresnar 
+# Mad by Xinh Studio from the Noun Project
