@@ -95,10 +95,18 @@ ggplot() +
              by = "width") +
   geom_text(data = treats_labels,
             aes(x = x, y = y, label = labels),
-            color = "black",
+            fontface = "bold",
+            color = "#916C47",
             hjust = 0.5,
             size = 5,
             family = "Darker Grotesque") +
+  annotate(geom = "text", 
+           x = 32, y = 29, label = "APRIL, 2021",
+           fontface = "bold",
+           color = "black",
+           size = 10,
+           family = "Darker Grotesque") +
+  labs(caption = "Viz: @ijeamaka_a | Icon: Xinh Studio") +
   scale_color_identity() +
   coord_equal() +
   theme(
@@ -107,6 +115,10 @@ ggplot() +
     plot.background = element_blank(),
     panel.background = element_rect(fill = "white",
                                     color = "white"),
+    plot.caption = element_text(color = "black",
+                                family = "Darker Grotesque",
+                                size = 10,
+                                hjust = 0.5),
     axis.text = element_blank(),
     axis.title = element_blank(),
     axis.ticks = element_blank()
