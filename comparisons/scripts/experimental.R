@@ -188,7 +188,7 @@ ggplot() +
            angle = 90) +
   # The extras
   labs(title = "Colors Featured: #rtistry vs. #TidyTuesday",
-       subtitle = "The hex codes used in all pieces are grouped by \nsimilar hue and arranged with increasing lightness",
+       subtitle = "The hex codes used in all of my pieces are grouped by \nsimilar hue and arranged with increasing lightness",
        caption = "Viz: @ijeamaka_a  \n") +
   scale_color_identity() +
   xlim(-12, 12) +
