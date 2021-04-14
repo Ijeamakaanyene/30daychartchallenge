@@ -1,6 +1,7 @@
 # Other files
 /comparisons/data/
 /distributions/data/
+/relationships/data/
 .DS_Store
 
 # History files
