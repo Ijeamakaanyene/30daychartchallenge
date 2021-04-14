@@ -4,17 +4,15 @@ library(ggplot2)
 tweets = rio::import(here::here("relationships", "data", "geokaramanis_tweets.xlsx")) %>%
   janitor::clean_names()
 
-Zissou1 = c("#3B9AB2", "#EBCC2A", "#E1AF00", "#F21A00")
-
-mean_comp = tweets %>%
+median_comp = tweets %>%
   filter(challenge == "Comparisons") %>%
-  summarise(mean_comp = round(mean(likes), 1)) %>%
-  pull(mean_comp)
+  summarise(median_comp = median(likes)) %>%
+  pull(median_comp)
 
-mean_dist = tweets %>%
+median_dist = tweets %>%
   filter(challenge == "Distributions") %>%
-  summarise(mean_dist = round(mean(likes), 1)) %>%
-  pull(mean_dist)
+  summarise(median_dist = median(likes)) %>%
+  pull(median_dist)
 
 
 
@@ -26,24 +24,24 @@ ggplot(data = tweets) +
                  fill = "orange",
              shape = 21) +
   # comp labels
-  geom_segment(aes(y = mean_comp, yend = mean_comp,
+  geom_segment(aes(y = median_comp, yend = median_comp,
                    x = 0.75, xend = 1.25)) +
-  geom_text(aes(x = 0.6, y = mean_comp - 20, label = "Mean: \n56.5"),
+  geom_text(aes(x = 0.6, y = median_comp - 20, label = "Median: \n56.5"),
             family = "Fira Sans Bold",
             lineheight = 0.75) +
   geom_curve(aes(x = 0.6, xend = 0.73,
-                   y = mean_comp - 15, yend = mean_comp),
+                   y = median_comp - 15, yend = median_comp),
              size = .25,
              curvature = -.5,
              arrow = arrow(length = unit(0.03, "npc"))) +
   # dist labels
-  geom_segment(aes(y = mean_dist, yend = mean_dist,
+  geom_segment(aes(y = median_dist, yend = median_dist,
                    x = 1.75, xend = 2.25)) +
-  geom_text(aes(x = 1.6, y = mean_dist - 20, label = "Mean: \n51.8"),
+  geom_text(aes(x = 1.6, y = median_dist - 20, label = "Median: \n51"),
             family = "Fira Sans Bold",
             lineheight = 0.75) +
   geom_curve(aes(x = 1.6, xend = 1.73,
-                 y = mean_dist - 15, yend = mean_dist),
+                 y = median_dist - 15, yend = median_dist),
              size = .25,
              curvature = -.5,
              arrow = arrow(length = unit(0.03, "npc"))) +
